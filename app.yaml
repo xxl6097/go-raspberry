@@ -1,0 +1,14 @@
+server:
+    port: 8080
+    apipath: /v1/api
+logview:
+    #log的web访问端口
+    username: admin
+    password: admin
+webhook:
+    wx:
+        host: http://127.0.0.1:3001/webhook/msg
+    dd:
+        host: https://oapi.dingtalk.com/robot/send?access_token=e3fd8d1759709fdb214a778f8bccc411acb533c698d8949cf34cf2ac73aedba9
+
+token: het002402,aaa,afefe
