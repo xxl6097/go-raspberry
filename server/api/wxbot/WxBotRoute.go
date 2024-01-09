@@ -30,4 +30,10 @@ func (this *TestRoute) Setup(router *mux.Router) {
 		Path:   "/wxbot/webhook",
 		Fun:    this.controller.WebHook_ddnsgo,
 	})
+	route.RouterUtil.AddHandleFunc(router, route.ApiModel{
+		Method: http.MethodGet,
+		Path:   "/wxbot/test",
+		Fun:    this.controller.TestSendMsg,
+		NoAuth: true,
+	})
 }

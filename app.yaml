@@ -7,7 +7,8 @@ logview:
     password: admin
 webhook:
     wx:
-        host: http://127.0.0.1:3001/webhook/msg
+        host: http://127.0.0.1:3001/webhook/msg/v2
+        user: uuxia
     dd:
         host: https://oapi.dingtalk.com/robot/send?access_token=e3fd8d1759709fdb214a778f8bccc411acb533c698d8949cf34cf2ac73aedba9
 

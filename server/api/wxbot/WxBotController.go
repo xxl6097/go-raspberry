@@ -24,6 +24,15 @@ func (this *WxBotController) SendMsg(w http.ResponseWriter, r *http.Request) {
 	Respond(w, Ignore(false))
 }
 
+func (this *WxBotController) TestSendMsg(w http.ResponseWriter, r *http.Request) {
+	text := util.GetRequestParam(r, "text")
+	if text != "" {
+		glog.Warn("resp---->", text)
+		this.srv.Test(text)
+	}
+	Respond(w, Ok())
+}
+
 func (this *WxBotController) WebHook_ddnsgo(w http.ResponseWriter, r *http.Request) {
 	req := util.GetReqData[DDNSGOEntity](w, r)
 	if req != nil {

@@ -24,6 +24,9 @@ func Ok() map[string]interface{} {
 func WXRespond(to, types, content string) map[string]interface{} {
 	return map[string]interface{}{"to": to, "type": types, "content": content}
 }
+func WXRespondv2(to, types, content string) map[string]interface{} {
+	return map[string]interface{}{"to": to, "data": map[string]interface{}{"type": types, "content": content}}
+}
 
 func DDRespond(msgtype, title, text string) map[string]interface{} {
 	return map[string]interface{}{"msgtype": msgtype, msgtype: map[string]interface{}{"title": title, "text": text}}

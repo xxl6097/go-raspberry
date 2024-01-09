@@ -37,9 +37,9 @@ func NewService() *WxBotService {
 	}
 }
 
-func (this *WxBotService) pushwx(text string) {
+func (this *WxBotService) pushwx(user, text string) {
 	header := map[string]string{"Content-Type": "application/json"}
-	httpclient.PostStruct(this.wxhost, header, WXRespond("uuxia", "text", text))
+	httpclient.PostStruct(this.wxhost, header, WXRespondv2(user, "text", text))
 }
 
 func (this *WxBotService) pushdd(text string) {
@@ -48,6 +48,11 @@ func (this *WxBotService) pushdd(text string) {
 
 func (this *WxBotService) Webhook(entity *DDNSGOEntity) {
 	text := fmt.Sprintf("# 侨城豪苑公网IP变了\n## IPV4更新了\n - 公网地址：%s \n - 域名地址：%s \n - 域名更新结果：%s \n## IPV6更新了\n - 公网地址：%s \n - 域名地址：%s \n - 域名更新结果：%s", entity.Ipv4Addr, entity.Ipv4Domains, entity.Ipv4Result, entity.Ipv6Addr, entity.Ipv6Domains, entity.Ipv6Result)
-	this.pushwx(text)
+	this.pushwx(config.Get().Webhook.WX.User, text)
+	this.pushdd(text)
+}
+
+func (this *WxBotService) Test(text string) {
+	this.pushwx(config.Get().Webhook.WX.User, text)
 	this.pushdd(text)
 }

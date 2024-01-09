@@ -18,8 +18,13 @@ type HostConfig struct {
 	Host string `yaml:"host"`
 }
 
+type WxConfig struct {
+	Host string `yaml:"host"`
+	User string `yaml:"user"`
+}
+
 type WebHookConfig struct {
-	WX HostConfig `yaml:"wx"`
+	WX WxConfig   `yaml:"wx"`
 	DD HostConfig `yaml:"dd"`
 }
 

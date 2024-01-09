@@ -8,14 +8,6 @@ import (
 	"net/http"
 )
 
-import "time"
-
-// "2023-05-29 15:10:41"
-func GetNowStr() string {
-	loc, _ := time.LoadLocation("Asia/Shanghai")
-	return time.Now().In(loc).Format("2006-01-02 15:04:05")
-}
-
 // GetHTTPResponse 处理HTTP结果，返回序列化的json
 func GetHTTPResponse(resp *http.Response, url string, err error, result interface{}) error {
 	body, err := GetHTTPResponseOrg(resp, url, err)

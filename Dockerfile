@@ -24,12 +24,28 @@ COPY --from=builder /app/main .
 COPY --from=builder /app/app.yaml ./conf/
 RUN ls -l ./conf/
 #COPY --from=builder /app/conf ./conf
-RUN echo "https://mirrors.aliyun.com/alpine/v3.8/main/" > /etc/apk/repositories \
-    && echo "https://mirrors.aliyun.com/alpine/v3.8/community/" >> /etc/apk/repositories \
-    && apk add --no-cache tzdata \
-    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime  \
-    && echo Asia/Shanghai > /etc/timezone \
-    && apk del tzdata
+RUN #echo "https://mirrors.aliyun.com/alpine/v3.8/main/" > /etc/apk/repositories \
+#    && echo "https://mirrors.aliyun.com/alpine/v3.8/community/" >> /etc/apk/repositories \
+#    && apk add --no-cache tzdata \
+#    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime  \
+#    && echo Asia/Shanghai > /etc/timezone \
+#    && apk del tzdata
+# 设置时区为上海
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN echo 'Asia/Shanghai' >/etc/timezone
+
+# 设置时区（以 Asia/Shanghai 为例）
+RUN apk add --no-cache tzdata
+ENV TZ=Asia/Shanghai
+#VOLUME ["/app/conf/app.yaml"]
+
+COPY entrypoint.sh /entrypoint.sh
+
+RUN apk add --no-cache bash ca-certificates su-exec tzdata; \
+    chmod +x /entrypoint.sh
+ENV PUID=0 PGID=0 UMASK=022
+
 # 需暴露的端口
 #EXPOSE 9090
-ENTRYPOINT ["./main","-c","./conf/app.yaml"]
+#ENTRYPOINT ["./main","-c","./conf/app.yaml"]
+CMD ["/entrypoint.sh"]
