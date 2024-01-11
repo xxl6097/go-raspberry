@@ -21,6 +21,9 @@ func (this *TestController) Test(w http.ResponseWriter, r *http.Request) {
 	body, _ := httpclient.Get1("https://www.baidu.com", nil)
 	glog.Info("->", string(body))
 	Respond(w, Ignore(false))
+	//params := url.Values{}    // Values是一个map类型
+	//params.Set("name", "tyy") // Set的时候会把string转成[]string
+	//params.Set("hobby", "足球")
 }
 
 func (this *TestController) Post(w http.ResponseWriter, r *http.Request) {

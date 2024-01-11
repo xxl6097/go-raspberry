@@ -20,3 +20,12 @@ docker cp wxBotWebhook:/conf/app.yaml .
 ```
 
 
+alias dps='docker ps $1 --format "table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}"'
+
+alias dbash='docker exec -it $1 /bin/bash'
+alias dsh='docker exec -it $1 /bin/sh'
+alias drm='docker stop $1 && docker rm $1'
+alias ddel='docker rmi $1'
+alias dlog='docker logs -f $1'
+
+
